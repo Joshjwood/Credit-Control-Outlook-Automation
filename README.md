@@ -23,15 +23,15 @@ Input Requirements
         Column C: Customer Name - The name of the customer. This should be a string and will be used to personalize the email (e.g., John Doe).    
         Column D: Customer Email - The email address of the customer. This must be a valid email address (e.g., johndoe@example.com).    
 
-Example Excel Format:
-Overdue Date	Overdue Amount	Customer Name	Customer Email
-2024-07-15	500.00	John Doe	johndoe@example.com
-2024-06-20	250.50	Jane Smith	janesmith@example.com
-2. Attachments Folder: attachments
+Example Excel Format:    
+Overdue Date	Overdue Amount	Customer Name	Customer Email    
+2024-07-15	500.00	John Doe	johndoe@example.com    
+2024-06-20	250.50	Jane Smith	janesmith@example.com      
+2. Attachments Folder: attachments    
 
--The script looks for a folder named attachments in the same directory where the script is located.
--This folder should contain files relevant to the customers listed in the spreadsheet. The script will attach any files found in this folder that include the customer's name in the filename.
--If no attachments are found for a customer, the script will still send the email without attachments.
+-The script looks for a folder named attachments in the same directory where the script is located.    
+-This folder should contain files relevant to the customers listed in the spreadsheet. The script will attach any files found in this folder that include the customer's name in the filename.    
+-If no attachments are found for a customer, the script will still send the email without attachments.    
 
 Example File Structure:
 
@@ -46,10 +46,10 @@ markdown
 
 How to Use
 
--Prepare the Spreadsheet: Ensure that the Excel file overdue_customers.xlsx is formatted correctly and placed in the same directory as the script.
--Prepare the Attachments Folder: Place all relevant attachment files in the attachments folder, ensuring that filenames contain the customer's name for the script to recognize and attach them correctly.
--Run the Script: Execute the script in your preferred Python environment (e.g., PyCharm). The script will process each customer in the spreadsheet, generate a personalized email, attach any relevant files, and send the email through Outlook.
--Monitor Console Output: The script will provide detailed output in the console, showing the progress and status of each email sent.
+-Prepare the Spreadsheet: Ensure that the Excel file overdue_customers.xlsx is formatted correctly and placed in the same directory as the script.      
+-Prepare the Attachments Folder: Place all relevant attachment files in the attachments folder, ensuring that filenames contain the customer's name for the script to recognize and attach them correctly.    
+-Run the Script: Execute the script in your preferred Python environment (e.g., PyCharm). The script will process each customer in the spreadsheet, generate a personalized email, attach any relevant files, and send the email through Outlook.    
+-Monitor Console Output: The script will provide detailed output in the console, showing the progress and status of each email sent.    
 
 Prerequisites
 
