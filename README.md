@@ -7,11 +7,11 @@ This Python script automates the process of sending credit control emails to cus
 The script is designed to handle multiple customers at once, selecting one of several email templates at random to avoid sending repetitive messages to the same customer.
 How It Works
 
-    Reads Input Data: The script reads customer information from an Excel spreadsheet (overdue_customers.xlsx). This file must contain specific columns with details about each customer's overdue payment.
-    Generates Personalized Emails: Using the data from the spreadsheet, the script generates a personalized email for each customer. The email includes the amount overdue, the due date (formatted in a friendly way), and the number of days the payment has been overdue.
-    Finds Attachments: For each customer, the script searches for relevant overdue statements in a specified folder (attachments) and attaches them to the email if found.
-    Sends Emails via Outlook: The script uses the Microsoft Outlook application to send the emails to the customers.
-    Console Output: Throughout the process, the script provides detailed output in the console to help you monitor which customers are being processed and the status of each email sent.
+-Reads Input Data: The script reads customer information from an Excel spreadsheet (overdue_customers.xlsx). This file must contain specific columns with details about each customer's overdue payment.
+-Generates Personalized Emails: Using the data from the spreadsheet, the script generates a personalized email for each customer. The email includes the amount overdue, the due date (formatted in a friendly way), and the number of days the payment has been overdue.
+-Finds Attachments: For each customer, the script searches for relevant overdue statements in a specified folder (attachments) and attaches them to the email if found.
+-Sends Emails via Outlook: The script uses the Microsoft Outlook application to send the emails to the customers.
+-Console Output: Throughout the process, the script provides detailed output in the console to help you monitor which customers are being processed and the status of each email sent.
 
 Input Requirements
 1. Excel Spreadsheet: overdue_customers.xlsx
@@ -29,9 +29,9 @@ Overdue Date	Overdue Amount	Customer Name	Customer Email
 2024-06-20	250.50	Jane Smith	janesmith@example.com
 2. Attachments Folder: attachments
 
-    The script looks for a folder named attachments in the same directory where the script is located.
-    This folder should contain files relevant to the customers listed in the spreadsheet. The script will attach any files found in this folder that include the customer's name in the filename.
-    If no attachments are found for a customer, the script will still send the email without attachments.
+-The script looks for a folder named attachments in the same directory where the script is located.
+-This folder should contain files relevant to the customers listed in the spreadsheet. The script will attach any files found in this folder that include the customer's name in the filename.
+-If no attachments are found for a customer, the script will still send the email without attachments.
 
 Example File Structure:
 
@@ -46,10 +46,10 @@ markdown
 
 How to Use
 
-    Prepare the Spreadsheet: Ensure that the Excel file overdue_customers.xlsx is formatted correctly and placed in the same directory as the script.
-    Prepare the Attachments Folder: Place all relevant attachment files in the attachments folder, ensuring that filenames contain the customer's name for the script to recognize and attach them correctly.
-    Run the Script: Execute the script in your preferred Python environment (e.g., PyCharm). The script will process each customer in the spreadsheet, generate a personalized email, attach any relevant files, and send the email through Outlook.
-    Monitor Console Output: The script will provide detailed output in the console, showing the progress and status of each email sent.
+-Prepare the Spreadsheet: Ensure that the Excel file overdue_customers.xlsx is formatted correctly and placed in the same directory as the script.
+-Prepare the Attachments Folder: Place all relevant attachment files in the attachments folder, ensuring that filenames contain the customer's name for the script to recognize and attach them correctly.
+-Run the Script: Execute the script in your preferred Python environment (e.g., PyCharm). The script will process each customer in the spreadsheet, generate a personalized email, attach any relevant files, and send the email through Outlook.
+-Monitor Console Output: The script will provide detailed output in the console, showing the progress and status of each email sent.
 
 Prerequisites
 
