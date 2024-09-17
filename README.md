@@ -16,12 +16,12 @@ How It Works
 Input Requirements
 1. Excel Spreadsheet: overdue_customers.xlsx
 
-    The script requires an Excel file named overdue_customers.xlsx located in the same directory as the script.
-    The spreadsheet must contain four columns in the following order:
-        Column A: Overdue Date - The date when the payment was originally due. The date should be in a recognizable date format (e.g., 2023-05-19, 07/15/2024, etc.). The script will reformat this date for the emails.
-        Column B: Overdue Amount - The amount of money that is overdue. This can be a numeric value representing the currency (e.g., 100.50, 2500).
-        Column C: Customer Name - The name of the customer. This should be a string and will be used to personalize the email (e.g., John Doe).
-        Column D: Customer Email - The email address of the customer. This must be a valid email address (e.g., johndoe@example.com).
+    The script requires an Excel file named overdue_customers.xlsx located in the same directory as the script.    
+    The spreadsheet must contain four columns in the following order:    
+        Column A: Overdue Date - The date when the payment was originally due. The date should be in a recognizable date format (e.g., 2023-05-19, 07/15/2024, etc.). The script will reformat this date for the emails.    
+        Column B: Overdue Amount - The amount of money that is overdue. This can be a numeric value representing the currency (e.g., 100.50, 2500).    
+        Column C: Customer Name - The name of the customer. This should be a string and will be used to personalize the email (e.g., John Doe).    
+        Column D: Customer Email - The email address of the customer. This must be a valid email address (e.g., johndoe@example.com).    
 
 Example Excel Format:
 Overdue Date	Overdue Amount	Customer Name	Customer Email
