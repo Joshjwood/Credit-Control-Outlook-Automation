@@ -41,21 +41,16 @@ def format_overdue_date(date):
 
 
 def find_attachments(attachments_folder, customer_name):
-    print(f"Looking for attachments for customer: {customer_name}")
-    print("-" * 50)  # Separator line for clarity
     attachments = []
     for file_name in os.listdir(attachments_folder):
         # Check if the file name contains the customer's name
         if customer_name in file_name:
             attachment_path = os.path.join(attachments_folder, file_name)
             attachments.append(attachment_path)
-            print(f"Found attachment: {attachment_path}")
-    if not attachments:
-        print(f"No attachments found for {customer_name}")
     return attachments
 
 
-def send_email_via_outlook(to_email, subject, message, attachments):
+def send_email_via_outlook(to_email, subject, message, attachments, from_email=None):
     try:
         print(f"\nAttempting to create an Outlook email for {to_email}")
         # Create an Outlook application instance
@@ -66,6 +61,11 @@ def send_email_via_outlook(to_email, subject, message, attachments):
         mail.To = to_email
         mail.Subject = subject
         mail.Body = message
+
+        # Set the 'From' email address if specified
+        if from_email:
+            mail.SentOnBehalfOfName = from_email
+
         print(f"Email created for {to_email} with subject: {subject}")
 
         # Attach files if there are any
@@ -85,8 +85,7 @@ def process_overdue_customers(spreadsheet_path, attachments_folder):
     # Read the spreadsheet
     try:
         data = pd.read_excel(spreadsheet_path)
-        print("Spreadsheet successfully read.")
-        print(f"Data read: {data.head()}\n")  # Print the first few rows to verify the content
+        print("Spreadsheet successfully read.\n")
     except Exception as e:
         print(f"Failed to read spreadsheet: {e}\n")
         return
@@ -95,11 +94,11 @@ def process_overdue_customers(spreadsheet_path, attachments_folder):
         print("The spreadsheet is empty.\n")
         return
 
-    for index, row in data.iterrows():
-        print("\n" + "=" * 50)  # Separator line for clarity
-        # Print the row data to see what is being processed
-        print(f"Processing Row {index + 1}: {row}\n")
+    # List to store customer email details for sending later
+    email_summaries = []
 
+    # Assessment Phase
+    for index, row in data.iterrows():
         # Verify column access, update keys if needed
         try:
             overdue_date = row['A']
@@ -115,25 +114,45 @@ def process_overdue_customers(spreadsheet_path, attachments_folder):
         formatted_overdue_date = format_overdue_date(overdue_date)
         days_overdue = (datetime.now() - overdue_date).days
 
-        print(f"Customer: {customer_name}")
-        print(f"Overdue Amount: {overdue_amount}")
-        print(f"Overdue Date: {formatted_overdue_date}")
-        print(f"Days Overdue: {days_overdue}\n")
-
-        # Choose a random email template
-        email_body = random.choice(EMAIL_TEMPLATES).format(
-            customer_name=customer_name,
-            overdue_amount=overdue_amount,
-            overdue_date=formatted_overdue_date,
-            days_overdue=days_overdue
-        )
-        print(f"Email body created for {customer_name}:\n{email_body}\n")
-
         # Find all relevant attachments for the customer
         attachments = find_attachments(attachments_folder, customer_name)
+        num_attachments = len(attachments)
 
-        # Send the email with the attachments (if any)
-        send_email_via_outlook(customer_email, "Overdue Payment Notification", email_body, attachments)
+        # Create summary message for this customer
+        summary_message = f"{customer_name} will be sent an email with {num_attachments} attachment(s)"
+        print(summary_message)
+
+        # Store details for sending emails later
+        email_summaries.append({
+            'to_email': customer_email,
+            'subject': "Overdue Payment Notification",
+            'message': random.choice(EMAIL_TEMPLATES).format(
+                customer_name=customer_name,
+                overdue_amount=overdue_amount,
+                overdue_date=formatted_overdue_date,
+                days_overdue=days_overdue
+            ),
+            'attachments': attachments,
+            'summary': summary_message
+        })
+
+    # Confirmation
+    print("\nIs this correct? Press Y to continue (send emails), or any other key to abort:")
+    user_input = input().strip().upper()
+
+    if user_input == 'Y':
+        # Send Emails Phase
+        for email_detail in email_summaries:
+            print("\n" + "=" * 50)  # Separator line for clarity
+            print(f"Sending to: {email_detail['summary']}\n")
+            send_email_via_outlook(
+                email_detail['to_email'],
+                email_detail['subject'],
+                email_detail['message'],
+                email_detail['attachments']
+            )
+    else:
+        print("\nAborted. No emails were sent.")
 
 
 if __name__ == "__main__":
