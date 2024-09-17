@@ -5,6 +5,7 @@ Introduction
 This Python script automates the process of sending credit control emails to customers with overdue payments. Using Microsoft Outlook, the script reads customer data from an Excel spreadsheet, generates personalized emails based on predefined templates, attaches any relevant overdue statements, and sends these emails to the respective customers.
  
 The script is designed to handle multiple customers at once, selecting one of several email templates at random to avoid sending repetitive messages to the same customer.    
+
 How It Works
 
 -Reads Input Data: The script reads customer information from an Excel spreadsheet (overdue_customers.xlsx). This file must contain specific columns with details about each customer's overdue payment.    
