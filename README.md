@@ -59,7 +59,7 @@ Prerequisites
 
     bash
 
-    pip install pandas pywin32
+    pip install pandas pywin32 openpyxl
 
 Notes
 
